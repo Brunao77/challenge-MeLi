@@ -54,7 +54,7 @@ export const Navbar = ({ title }) => {
             align-items: center;
           }
           img {
-            width: max(6.5vw, 100px);
+            width: max(6.5vw, 50px);
             user-select: none;
             cursor: pointer;
           }
@@ -74,7 +74,7 @@ export const Navbar = ({ title }) => {
             border: 0;
             color: ${colors.black};
             border-radius: 5px 0 0 5px;
-            font-size: 15px;
+            font-size: max(1vw, 10px);
           }
           input::placeholder {
             color: ${colors.secondary};
@@ -94,6 +94,14 @@ export const Navbar = ({ title }) => {
           }
           .search-icon:hover {
             opacity: 91%;
+          }
+          @media (max-width: 850px) {
+            input {
+              width: 80%;
+            }
+            .search-icon {
+              width: 20%;
+            }
           }
         `}
       </style>

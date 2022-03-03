@@ -76,6 +76,7 @@ const Items = ({ products, search }) => {
             color: ${colors.secondaryBold};
           }
           p {
+            font-size: max(0.8vw, 5px);
             gap: 5px;
             display: flex;
           }
@@ -93,17 +94,17 @@ const Items = ({ products, search }) => {
             box-shadow: 0 2px 2px 0 rgb(0 0 0 / 10%);
           }
           img {
-            width: 170px;
-            height: 170px;
+            width: max(10vw, 50px);
+            height: max(10vw, 50px);
             object-fit: contain;
             user-select: none;
           }
           .info-container {
-            width: 40vw;
+            width: 70%;
             padding: 10px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: max(0.8vw, 5px);
           }
           .shipping-icon {
             border-radius: 999px;
@@ -116,12 +117,12 @@ const Items = ({ products, search }) => {
           }
           h1 {
             font-weight: 400;
-            font-size: 20px;
+            font-size: max(1.2vw, 10px);
             margin: 0;
           }
           h2 {
             font-weight: 400;
-            font-size: 25px;
+            font-size: max(1.3vw, 10px);
             margin: 0;
             display: flex;
             flex-direction: row;
@@ -130,8 +131,17 @@ const Items = ({ products, search }) => {
           }
           h3 {
             font-weight: 400;
-            font-size: 15px;
+            font-size: max(0.8vw, 5px);
             color: ${colors.secondaryBold};
+          }
+          @media (max-width: 850px) {
+            section {
+              width: 100vw;
+              padding: 10px;
+            }
+            .card {
+              padding: 0;
+            }
           }
         `}
       </style>

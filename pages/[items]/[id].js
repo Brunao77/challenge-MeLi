@@ -16,7 +16,7 @@ const Item = ({ product }) => {
       </Head>
       <AppLayout>
         <aside>
-          Aquí {'>'} irían {'>'} categorías
+          Aquí {'>'} Irían {'>'} Categorías
         </aside>
         <section>
           <div className="left-content">
@@ -54,8 +54,8 @@ const Item = ({ product }) => {
         aside {
           margin: 5px;
           color: ${colors.secondaryBold};
+          font-size: max(0.8vw, 5px);
         }
-
         div {
           display: flex;
           flex-direction: column;
@@ -74,12 +74,13 @@ const Item = ({ product }) => {
         }
         img {
           width: 100%;
-          height: 25vw;
+          height: max(25vw, 200px);
           object-fit: contain;
           user-select: none;
         }
         p {
           color: ${colors.secondaryBold};
+          font-size: max(1vw, 10px);
           margin: 0;
         }
         .info-content {
@@ -90,25 +91,31 @@ const Item = ({ product }) => {
         }
         h1 {
           font-weight: 700;
-          font-size: 25px;
+          font-size: max(1.3vw, 15px);
           margin: 0;
         }
         h2 {
           font-weight: 500;
-          font-size: 40px;
+          font-size: max(2.1vw, 15px);
           margin: 0;
         }
         h3 {
           font-weight: 500;
-          font-size: 25px;
+          font-size: max(1.4vw, 15px);
           color: ${colors.black};
           margin: 0;
         }
         h4 {
           font-weight: 500;
-          font-size: 15px;
+          font-size: max(0.8vw, 10px);
           color: ${colors.black};
           margin: 0;
+        }
+        @media (max-width: 850px) {
+          section {
+            width: 100vw;
+            padding: 10px;
+          }
         }
       `}</style>
     </>

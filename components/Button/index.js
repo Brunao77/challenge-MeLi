@@ -11,7 +11,7 @@ export const Button = ({ children }) => {
             color: ${colors.white};
             border: 0;
             border-radius: 5px;
-            font-size: 20px;
+            font-size: max(1.1vw, 10px);
             width: 100%;
             padding: 10px;
             cursor: pointer;
