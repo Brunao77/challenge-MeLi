@@ -4,6 +4,7 @@ import { AppLayout } from '../../components/AppLayout'
 import { Spinner } from '../../components/Spinner'
 import { colors } from '../../styles/theme'
 import { FaShippingFast } from 'react-icons/fa'
+import { server } from '../../config'
 
 const Items = ({ products, search }) => {
   const router = useRouter()
@@ -133,9 +134,7 @@ export default Items
 export async function getServerSideProps(context) {
   const { query } = context
   const { search } = query
-  const response = await fetch(
-    `http://localhost:3000/api/items?search=${search}`
-  )
+  const response = await fetch(`${server}/api/items?search=${search}`)
   const data = await response.json()
   return {
     props: { products: data.items, search }

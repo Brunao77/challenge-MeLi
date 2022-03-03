@@ -3,6 +3,7 @@ import { AppLayout } from '../../components/AppLayout'
 import { Button } from '../../components/Button'
 import { Spinner } from '../../components/Spinner'
 import { colors } from '../../styles/theme'
+import { server } from '../../config'
 
 const Item = ({ product }) => {
   const { title, picture, description, condition, sold_quantity, price } =
@@ -118,7 +119,7 @@ export default Item
 export async function getServerSideProps(context) {
   const { params } = context
   const { id } = params
-  const response = await fetch(`http://localhost:3000/api/items/${id}`)
+  const response = await fetch(`${server}/api/items/${id}`)
   const data = await response.json()
   return {
     props: { product: data }
