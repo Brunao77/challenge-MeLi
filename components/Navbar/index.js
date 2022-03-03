@@ -3,7 +3,7 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
-export const Navbar = () => {
+export const Navbar = ({ title }) => {
   const [message, setMessage] = useState('')
   const router = useRouter()
 
@@ -29,7 +29,7 @@ export const Navbar = () => {
               type="text"
               onChange={handleChange}
               placeholder="Nunca dejes de buscar"
-              value={message}
+              defaultValue={title}
               onKeyPress={(e) => ['Enter'].includes(e.code) && handleSumbit()}
             />
             <div className="search-icon" onClick={handleSumbit}>
@@ -63,7 +63,7 @@ export const Navbar = () => {
             align-items: center;
             height: 4vh;
             width: 54vw;
-            border-radius: 5px 0 0 5px;
+            border-radius: 5px;
             box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
           }
           input {

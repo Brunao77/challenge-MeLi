@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { AppLayout } from '../../components/AppLayout'
+import { Spinner } from '../../components/Spinner'
 import { colors } from '../../styles/theme'
 
 const Items = () => {
@@ -15,38 +16,42 @@ const Items = () => {
         .then((res) => setProducts(res.items))
   }, [search])
 
-  if (!products) return <h1>Loading...</h1>
-
   const handleClick = (id) => {
     router.push(`/items/${id}`)
   }
 
   return (
     <>
-      <AppLayout>
-        <h1>GGGGGGG</h1>
-        <section>
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="card"
-              onClick={() => handleClick(product.id)}
-            >
-              <img src={product.thumbnail} />
-              <div className="info-container">
-                <h2>
-                  ${' '}
-                  {new Intl.NumberFormat('de-DE').format(
-                    product.prices.prices[0].amount
-                  )}
-                </h2>
-                {product.shipping.free_shipping && <h1>FREE</h1>}
-                <h1>{product.title}</h1>
-              </div>
-              <h3>{product.address.state_name}</h3>
-            </div>
-          ))}
-        </section>
+      <AppLayout title={search}>
+        {!products ? (
+          <Spinner />
+        ) : (
+          <>
+            <h1>GGGGGGG</h1>
+            <section>
+              {products.map((product) => (
+                <div
+                  key={product.id}
+                  className="card"
+                  onClick={() => handleClick(product.id)}
+                >
+                  <img src={product.thumbnail} />
+                  <div className="info-container">
+                    <h2>
+                      ${' '}
+                      {new Intl.NumberFormat('de-DE').format(
+                        product.prices.prices[0].amount
+                      )}
+                    </h2>
+                    {product.shipping.free_shipping && <h1>FREE</h1>}
+                    <h1>{product.title}</h1>
+                  </div>
+                  <h3>{product.address.state_name}</h3>
+                </div>
+              ))}
+            </section>
+          </>
+        )}
       </AppLayout>
       <style jsx>
         {`
@@ -55,7 +60,7 @@ const Items = () => {
             display: flex;
             flex-direction: column;
             width: 62vw;
-            padding: 0 20px;
+            padding: 20px;
             box-shadow: 0 1px 1px 0 rgb(0 0 0 / 10%);
             border-radius: 5px;
           }
@@ -68,6 +73,9 @@ const Items = () => {
           }
           .card:last-child {
             border: 0;
+          }
+          .card:hover {
+            box-shadow: 0 2px 2px 0 rgb(0 0 0 / 10%);
           }
           img {
             width: 150px;
