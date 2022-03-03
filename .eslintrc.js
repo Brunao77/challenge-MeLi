@@ -19,6 +19,7 @@ module.exports = {
     'react/prop-types': 'off',
     'multiline-ternary': 'off',
     indent: 'off',
-    'one-var': 'off'
+    'one-var': 'off',
+    camelcase: 'off'
   }
 }

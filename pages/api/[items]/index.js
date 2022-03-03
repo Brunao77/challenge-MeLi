@@ -8,10 +8,32 @@ export default async function handler(req, res) {
 
   res.json({
     author: {
-      name: 'br',
-      lastName: 'asasd'
+      name: '',
+      lastname: ''
     },
     categories: [],
-    items: results.slice(0, 4)
+    items: results.slice(0, 4).map((product) => {
+      const {
+        id,
+        title,
+        price,
+        currency_id,
+        thumbnail,
+        condition,
+        shipping,
+        address
+      } = product
+      const { free_shipping } = shipping
+      const { state_name } = address
+      return {
+        id,
+        title,
+        price: { currency: currency_id, amount: price, decimals: '00' },
+        picture: thumbnail,
+        condition,
+        free_shipping,
+        state_name
+      }
+    })
   })
 }

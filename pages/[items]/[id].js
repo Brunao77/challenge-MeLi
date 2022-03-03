@@ -17,6 +17,11 @@ const Item = () => {
         .then(setProduct)
   }, [id])
 
+  if (product) {
+    const { title, picture, description, condition, sold_quantity, price } =
+      product.item
+  }
+
   return (
     <>
       <AppLayout>
@@ -27,20 +32,20 @@ const Item = () => {
             <h1>Hola</h1>
             <section>
               <div className="left-content">
-                <img src={product.item.thumbnail} />
+                <img src={picture} />
                 <h3>Descripcion del producto</h3>
-                <p>{product.description.plain_text}</p>
+                <p>{description}</p>
               </div>
               <div className="right-content">
                 <div className="info-content">
                   <h4>
-                    {product.item.condition === 'new' && 'Nuevo'} -{' '}
-                    {product.item.sold_quantity} vendidos
+                    {condition === 'new' ? 'Nuevo' : 'Usado'} - {sold_quantity}{' '}
+                    vendidos
                   </h4>
-                  <h1>{product.item.title}</h1>
+                  <h1>{title}</h1>
                   <h2>
-                    ${' '}
-                    {new Intl.NumberFormat('de-DE').format(product.item.price)}
+                    {price.currency === 'ARS' ? '$' : 'U$S'}{' '}
+                    {new Intl.NumberFormat('de-DE').format(price.amount)}
                   </h2>
                 </div>
                 <Button>Comprar</Button>

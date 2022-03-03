@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { AppLayout } from '../../components/AppLayout'
 import { Spinner } from '../../components/Spinner'
 import { colors } from '../../styles/theme'
+import { FaShippingFast } from 'react-icons/fa'
 
 const Items = () => {
   const router = useRouter()
@@ -20,6 +21,7 @@ const Items = () => {
     router.push(`/items/${id}`)
   }
 
+  console.log(products)
   return (
     <>
       <AppLayout title={search}>
@@ -29,26 +31,34 @@ const Items = () => {
           <>
             <h1>GGGGGGG</h1>
             <section>
-              {products.map((product) => (
-                <div
-                  key={product.id}
-                  className="card"
-                  onClick={() => handleClick(product.id)}
-                >
-                  <img src={product.thumbnail} />
-                  <div className="info-container">
-                    <h2>
-                      ${' '}
-                      {new Intl.NumberFormat('de-DE').format(
-                        product.prices.prices[0].amount
-                      )}
-                    </h2>
-                    {product.shipping.free_shipping && <h1>FREE</h1>}
-                    <h1>{product.title}</h1>
+              {products.map((product) => {
+                const { id, title, price, picture, free_shipping, state_name } =
+                  product
+                const { amount, currency } = price
+                return (
+                  <div
+                    key={id}
+                    className="card"
+                    onClick={() => handleClick(id)}
+                  >
+                    <img src={picture} />
+                    <div className="info-container">
+                      <h2>
+                        {currency === 'ARS' ? '$' : 'U$S'}{' '}
+                        {new Intl.NumberFormat('de-DE').format(amount)}
+                        {free_shipping && (
+                          <div className="shipping-icon">
+                            <FaShippingFast size={13} />
+                          </div>
+                        )}
+                      </h2>
+
+                      <h1>{title}</h1>
+                    </div>
+                    <h3>{state_name}</h3>
                   </div>
-                  <h3>{product.address.state_name}</h3>
-                </div>
-              ))}
+                )
+              })}
             </section>
           </>
         )}
@@ -66,7 +76,7 @@ const Items = () => {
           }
           .card {
             color: ${colors.black};
-            padding: 20px 0;
+            padding: 20px 10px;
             display: flex;
             border-bottom: 1px solid ${colors.secondaryLight};
             cursor: pointer;
@@ -78,8 +88,10 @@ const Items = () => {
             box-shadow: 0 2px 2px 0 rgb(0 0 0 / 10%);
           }
           img {
-            width: 150px;
-            height: 150px;
+            width: 170px;
+            height: 170px;
+            object-fit: contain;
+            user-select: none;
           }
           .info-container {
             width: 40vw;
@@ -87,6 +99,15 @@ const Items = () => {
             display: flex;
             flex-direction: column;
             gap: 10px;
+          }
+          .shipping-icon {
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background: #91db69;
           }
           h1 {
             font-weight: 400;
@@ -97,6 +118,10 @@ const Items = () => {
             font-weight: 400;
             font-size: 25px;
             margin: 0;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
           }
           h3 {
             font-weight: 400;
