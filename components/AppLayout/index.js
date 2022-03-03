@@ -5,7 +5,9 @@ export const AppLayout = ({ children }) => {
   return (
     <>
       <Navbar />
-      <main>{children}</main>
+      <main>
+        <div>{children}</div>
+      </main>
       <style jsx global>{`
         main {
           display: flex;

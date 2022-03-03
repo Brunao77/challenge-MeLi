@@ -1,15 +1,38 @@
 import { colors } from '../../styles/theme'
 import { AiOutlineSearch } from 'react-icons/ai'
+import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 export const Navbar = () => {
+  const [message, setMessage] = useState('')
+  const router = useRouter()
+
+  const handleChange = (event) => {
+    const { value } = event.target
+    setMessage(value)
+  }
+
+  const handleSumbit = () => {
+    router.push(`/items?search=${message}`)
+  }
+
   return (
     <>
       <nav>
         <div className="container">
-          <img src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.18.9/mercadolibre/logo__large_plus@2x.png" />
+          <img
+            src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.18.9/mercadolibre/logo__large_plus@2x.png"
+            onClick={() => router.push('/')}
+          />
           <section>
-            <input type="text" placeholder="Nunca dejes de buscar" />
-            <div className="search-icon">
+            <input
+              type="text"
+              onChange={handleChange}
+              placeholder="Nunca dejes de buscar"
+              value={message}
+              onKeyPress={(e) => ['Enter'].includes(e.code) && handleSumbit()}
+            />
+            <div className="search-icon" onClick={handleSumbit}>
               <AiOutlineSearch size={20} color={colors.black} />
             </div>
           </section>
@@ -31,6 +54,8 @@ export const Navbar = () => {
           }
           img {
             width: max(6.5vw, 100px);
+            user-select: none;
+            cursor: pointer;
           }
           section {
             display: flex;
@@ -38,6 +63,8 @@ export const Navbar = () => {
             align-items: center;
             height: 4vh;
             width: 54vw;
+            border-radius: 5px 0 0 5px;
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
           }
           input {
             width: 96%;
