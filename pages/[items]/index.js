@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { AppLayout } from '../../components/AppLayout'
-import { Spinner } from '../../components/Spinner'
 import { colors } from '../../styles/theme'
 import { FaShippingFast } from 'react-icons/fa'
 import { server } from '../../config'
@@ -11,7 +10,8 @@ const Items = ({ products, search }) => {
   const handleClick = (id) => {
     router.push(`/items/${id}`)
   }
-
+  const { categories, items } = products
+  const categoriesToShow = categories.slice(0, 4)
   return (
     <>
       <Head>
@@ -20,43 +20,43 @@ const Items = ({ products, search }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AppLayout title={search}>
-        {!products ? (
-          <Spinner />
-        ) : (
-          <>
-            <h1>GGGGGGG</h1>
-            <section>
-              {products.map((product) => {
-                const { id, title, price, picture, free_shipping, state_name } =
-                  product
-                const { amount, currency } = price
-                return (
-                  <div
-                    key={id}
-                    className="card"
-                    onClick={() => handleClick(id)}
-                  >
-                    <img src={picture} />
-                    <div className="info-container">
-                      <h2>
-                        {currency === 'ARS' ? '$' : 'U$S'}{' '}
-                        {new Intl.NumberFormat('de-DE').format(amount)}
-                        {free_shipping && (
-                          <div className="shipping-icon">
-                            <FaShippingFast size={13} />
-                          </div>
-                        )}
-                      </h2>
+        <aside>
+          {categoriesToShow.map((category, index) =>
+            index !== categoriesToShow.length - 1 ? (
+              <p key={index}>
+                {category} {'>'}
+              </p>
+            ) : (
+              <p key={index}>{category}</p>
+            )
+          )}
+        </aside>
+        <section>
+          {items.map((product) => {
+            const { id, title, price, picture, free_shipping, state_name } =
+              product
+            const { amount, currency } = price
+            return (
+              <div key={id} className="card" onClick={() => handleClick(id)}>
+                <img src={picture} />
+                <div className="info-container">
+                  <h2>
+                    {currency === 'ARS' ? '$' : 'U$S'}{' '}
+                    {new Intl.NumberFormat('de-DE').format(amount)}
+                    {free_shipping && (
+                      <div className="shipping-icon">
+                        <FaShippingFast size={13} />
+                      </div>
+                    )}
+                  </h2>
 
-                      <h1>{title}</h1>
-                    </div>
-                    <h3>{state_name}</h3>
-                  </div>
-                )
-              })}
-            </section>
-          </>
-        )}
+                  <h1>{title}</h1>
+                </div>
+                <h3>{state_name}</h3>
+              </div>
+            )
+          })}
+        </section>
       </AppLayout>
       <style jsx>
         {`
@@ -68,6 +68,16 @@ const Items = ({ products, search }) => {
             padding: 20px;
             box-shadow: 0 1px 1px 0 rgb(0 0 0 / 10%);
             border-radius: 5px;
+          }
+          aside {
+            display: flex;
+            gap: 5px;
+            width: 100%;
+            color: ${colors.secondaryBold};
+          }
+          p {
+            gap: 5px;
+            display: flex;
           }
           .card {
             color: ${colors.black};
@@ -137,6 +147,6 @@ export async function getServerSideProps(context) {
   const response = await fetch(`${server}/api/items?search=${search}`)
   const data = await response.json()
   return {
-    props: { products: data.items, search }
+    props: { products: data, search }
   }
 }

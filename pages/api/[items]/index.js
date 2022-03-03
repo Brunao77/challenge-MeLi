@@ -4,14 +4,18 @@ export default async function handler(req, res) {
     `https://api.mercadolibre.com/sites/MLA/search?q=${search}`
   )
   const data = await response.json()
-  const { results } = data
+  const { results, available_filters } = data
+
+  const { values } = available_filters[0]
 
   res.json({
     author: {
-      name: '',
-      lastname: ''
+      name: 'Bruno',
+      lastname: 'Munne'
     },
-    categories: [],
+    categories: values.map((category) => {
+      return category.name
+    }),
     items: results.slice(0, 4).map((product) => {
       const {
         id,
