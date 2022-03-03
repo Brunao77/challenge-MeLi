@@ -1,23 +1,12 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
 import { AppLayout } from '../../components/AppLayout'
 import { Spinner } from '../../components/Spinner'
 import { colors } from '../../styles/theme'
 import { FaShippingFast } from 'react-icons/fa'
 
-const Items = () => {
+const Items = ({ products, search }) => {
   const router = useRouter()
-  const [products, setProducts] = useState(null)
-  const { search } = router.query
-
-  useEffect(() => {
-    search &&
-      fetch(`/api/items?search=${search}`)
-        .then((res) => res.json())
-        .then((res) => setProducts(res.items))
-  }, [search])
-
   const handleClick = (id) => {
     router.push(`/items/${id}`)
   }
@@ -141,12 +130,14 @@ const Items = () => {
 
 export default Items
 
-/* export async function getServerSideProps(context) {
-  const { params } = context
-  const { search } = params
-  const response = await fetch(`/api/items?search=${search}`)
-  const data = response.json()
+export async function getServerSideProps(context) {
+  const { query } = context
+  const { search } = query
+  const response = await fetch(
+    `http://localhost:3000/api/items?search=${search}`
+  )
+  const data = await response.json()
   return {
-    props: { products: data.items } // will be passed to the page component as props
+    props: { products: data.items, search }
   }
-} */
+}

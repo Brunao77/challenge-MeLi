@@ -2,7 +2,6 @@ import { colors, fonts } from '../../styles/theme'
 import { Navbar } from '../Navbar'
 
 export const AppLayout = ({ children, title }) => {
-  console.log(title)
   return (
     <>
       <Navbar title={title} />
