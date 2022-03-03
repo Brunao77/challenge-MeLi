@@ -14,14 +14,13 @@ export const AppLayout = ({ children, title }) => {
           align-items: center;
           height: 100vh;
           flex-direction: column;
-          background: ${colors.background};
         }
         html,
         body {
           padding: 0;
           margin: 0;
           font-family: ${fonts.base};
-          background-color: black;
+          background-color: ${colors.background};
           color: white;
         }
         * {

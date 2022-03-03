@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { AppLayout } from '../../components/AppLayout'
 import { Button } from '../../components/Button'
-import { colors } from '../../styles/theme'
+import { breakpoints, colors } from '../../styles/theme'
 import { server } from '../../config'
 
 const Item = ({ product }) => {
@@ -54,7 +54,7 @@ const Item = ({ product }) => {
         aside {
           margin: 5px;
           color: ${colors.secondaryBold};
-          font-size: max(0.8vw, 5px);
+          font-size: max(0.8vw, 10px);
         }
         div {
           display: flex;
@@ -63,7 +63,7 @@ const Item = ({ product }) => {
         .left-content {
           display: flex;
           flex-direction: column;
-          gap: 20px;
+          gap: max(1vw, 5px);
           width: 75%;
         }
         .right-content {
@@ -111,7 +111,7 @@ const Item = ({ product }) => {
           color: ${colors.black};
           margin: 0;
         }
-        @media (max-width: 850px) {
+        @media (max-width: ${breakpoints.mobile}) {
           section {
             width: 100vw;
             padding: 10px;

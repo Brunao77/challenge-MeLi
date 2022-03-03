@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { AppLayout } from '../../components/AppLayout'
-import { colors } from '../../styles/theme'
+import { breakpoints, colors } from '../../styles/theme'
 import { FaShippingFast } from 'react-icons/fa'
 import { server } from '../../config'
 
@@ -76,7 +76,7 @@ const Items = ({ products, search }) => {
             color: ${colors.secondaryBold};
           }
           p {
-            font-size: max(0.8vw, 5px);
+            font-size: max(0.8vw, 10px);
             gap: 5px;
             display: flex;
           }
@@ -94,8 +94,8 @@ const Items = ({ products, search }) => {
             box-shadow: 0 2px 2px 0 rgb(0 0 0 / 10%);
           }
           img {
-            width: max(10vw, 50px);
-            height: max(10vw, 50px);
+            width: max(8vw, 50px);
+            height: max(8vw, 50px);
             object-fit: contain;
             user-select: none;
           }
@@ -134,7 +134,7 @@ const Items = ({ products, search }) => {
             font-size: max(0.8vw, 5px);
             color: ${colors.secondaryBold};
           }
-          @media (max-width: 850px) {
+          @media (max-width: ${breakpoints.mobile}) {
             section {
               width: 100vw;
               padding: 10px;

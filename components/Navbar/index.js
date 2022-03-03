@@ -1,4 +1,4 @@
-import { colors } from '../../styles/theme'
+import { breakpoints, colors } from '../../styles/theme'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
@@ -95,7 +95,7 @@ export const Navbar = ({ title }) => {
           .search-icon:hover {
             opacity: 91%;
           }
-          @media (max-width: 850px) {
+          @media (max-width: ${breakpoints.mobile}) {
             input {
               width: 80%;
             }
