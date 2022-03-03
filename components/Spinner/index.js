@@ -1,3 +1,5 @@
+import { colors } from '../../styles/theme'
+
 export const Spinner = () => {
   return (
     <>
@@ -9,7 +11,7 @@ export const Spinner = () => {
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            border-left-color: #09f;
+            border-left-color: ${colors.tertiary};
             animation: spin 1s ease infinite;
           }
           @keyframes spin {

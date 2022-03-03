@@ -45,6 +45,7 @@ export const Navbar = ({ title }) => {
             height: 7vh;
             display: flex;
             justify-content: center;
+            box-shadow: 0 1px 0 0 rgb(0 0 0 / 10%);
           }
           .container {
             width: 62vw;

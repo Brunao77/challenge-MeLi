@@ -20,8 +20,8 @@ export default async function handler(req, res) {
   const { plain_text } = dataDescription
   res.json({
     author: {
-      name: '',
-      lastname: ''
+      name: 'Bruno',
+      lastname: 'Munne'
     },
     item: {
       id: idItem,
