@@ -22,6 +22,7 @@ export const Navbar = ({ title }) => {
         <div className="container">
           <img
             src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.18.9/mercadolibre/logo__large_plus@2x.png"
+            alt="Logo MeLi"
             onClick={() => router.push('/')}
           />
           <section>
